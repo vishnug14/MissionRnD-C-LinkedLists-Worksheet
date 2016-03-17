@@ -24,19 +24,42 @@ Objectives of C-LinkedLists-1 Lesson:
 
 //Do not edit below Header Files
 #include <stdio.h>
+#include<malloc.h>
 #include "FunctionHeadersLinkedLists1.h"
+struct node {
+	int num;
+	struct node *next;
+};
+struct node * createNode(int num) {
+	struct node *newNode = (struct node *)malloc(sizeof(struct node));
+	newNode->num = num;
+	newNode->next = NULL;
+	return newNode;
+}
 
+struct node * createList(int num) {
+	struct node *head = createNode(num % 10);
+	num /= 10;
+	while (num) {
+		struct node *newNode = createNode(num % 10);
+		newNode->next = head;
+		head = newNode;
+		num /= 10;
+	}
+	return head;
+}
 int main(){
 
 	//Test 012SortSll
 
 	//Test numberToLinkedList
-
+	
 	//Test removeEveryKthNode
-
+	struct node *head1 = createList(1234);
+	sortLinkedList(head1);
 	//Test sortLinkedList
 
 	//Test twodigitLinkedList
-
+	
 	return 0;
 }
